@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://dmlgh8lodh2rm"]
+[gd_scene load_steps=2 format=3 uid="uid://dmlgh8lodh2rm"]
+
+[ext_resource type="PackedScene" uid="uid://bt6d7e3d0tutx" path="res://scenes/card.tscn" id="1_gsybx"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Card" parent="." instance=ExtResource("1_gsybx")]
+metadata/Name = "dsqq"
+
+[node name="Camera2D" type="Camera2D" parent="."]
