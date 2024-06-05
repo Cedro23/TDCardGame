@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bl8xc53ebchfy"]
+[gd_scene load_steps=11 format=3 uid="uid://bl8xc53ebchfy"]
 
 [ext_resource type="Script" path="res://scripts/enemies/basic_enemy.gd" id="1_02wp3"]
 [ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/enemies/enemy_state_machine.tscn" id="2_rmnyg"]
@@ -6,9 +6,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/aggro_state.gd" id="4_pfile"]
 [ext_resource type="Script" path="res://scripts/enemies/attack_state.gd" id="5_c2208"]
 [ext_resource type="Script" path="res://scripts/tools/state_debug.gd" id="6_cytqf"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_e3igx"]
-radius = 28.0179
+[ext_resource type="Script" path="res://scripts/tools/target_debug.gd" id="7_rfue3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xyw2v"]
 radius = 16.0
@@ -16,20 +14,16 @@ radius = 16.0
 [sub_resource type="LabelSettings" id="LabelSettings_2bupw"]
 font_size = 23
 
+[sub_resource type="LabelSettings" id="LabelSettings_5wudp"]
+font_size = 12
+
 [node name="MeleeEnemy" type="CharacterBody2D"]
 script = ExtResource("1_02wp3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.2
 one_shot = true
-
-[node name="AttackRange" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-shape = SubResource("CircleShape2D_e3igx")
-debug_color = Color(1, 0.137255, 0.12549, 0.419608)
 
 [node name="EnemyHitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xyw2v")
@@ -40,7 +34,6 @@ current_state = NodePath("Alert")
 
 [node name="Alert" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("3_q4ba4")
-can_move = null
 
 [node name="Aggro" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("4_pfile")
@@ -60,6 +53,15 @@ horizontal_alignment = 1
 script = ExtResource("6_cytqf")
 state_machine = NodePath("../EnemyStateMachine")
 
+[node name="TargetDebug" type="Label" parent="." node_paths=PackedStringArray("enemy")]
+offset_left = -54.0
+offset_top = -59.0
+offset_right = 54.0
+offset_bottom = -42.0
+text = "Target"
+label_settings = SubResource("LabelSettings_5wudp")
+horizontal_alignment = 1
+script = ExtResource("7_rfue3")
+enemy = NodePath("..")
+
 [connection signal="timeout" from="AttackTimer" to="EnemyStateMachine/Attack" method="_on_attack_timer_timeout"]
-[connection signal="body_entered" from="AttackRange" to="EnemyStateMachine/Aggro" method="_on_attack_range_body_entered"]
-[connection signal="body_exited" from="AttackRange" to="EnemyStateMachine/Attack" method="_on_attack_range_body_exited"]

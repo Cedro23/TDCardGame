@@ -10,6 +10,7 @@ var _hp:float
 @export_group("Attack stats")
 @export var attack_damage: float = 100.0
 @export var attack_range: float = 100.0
+@export var attack_cooldown: float = 1.0
 @onready var attack_timer: Timer = $AttackTimer
 
 @export_group("Movement stats")
@@ -19,6 +20,7 @@ var target: Building = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	attack_timer.wait_time = attack_cooldown
 	_hp = _max_hp
 
 func _process(_delta: float):

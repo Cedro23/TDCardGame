@@ -9,14 +9,15 @@ func enter():
 
 func process(_delta):
 	if enemy.target == null or not target_in_range():
+		enemy.attack_timer.stop()
 		transitioned.emit("alert")
 	if can_attack:
-		can_attack = false
 		attack()
 		enemy.attack_timer.start()
 
 func attack():
 	enemy.target.take_damage(enemy.attack_damage)
+	can_attack = false
 
 func _on_attack_timer_timeout():
 	can_attack = true

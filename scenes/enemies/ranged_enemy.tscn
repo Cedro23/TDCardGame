@@ -34,7 +34,6 @@ current_state = NodePath("Alert")
 
 [node name="Alert" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("3_cinbb")
-can_move = null
 
 [node name="Aggro" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("4_43v6s")
