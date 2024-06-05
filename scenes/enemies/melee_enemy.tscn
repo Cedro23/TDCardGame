@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bl8xc53ebchfy"]
 
-[ext_resource type="Script" path="res://scripts/enemies/melee_enemy.gd" id="1_b5e06"]
+[ext_resource type="Script" path="res://scripts/enemies/basic_enemy.gd" id="1_02wp3"]
 [ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/enemies/enemy_state_machine.tscn" id="2_rmnyg"]
 [ext_resource type="Script" path="res://scripts/enemies/alert_state.gd" id="3_q4ba4"]
 [ext_resource type="Script" path="res://scripts/enemies/aggro_state.gd" id="4_pfile"]
@@ -17,12 +17,12 @@ radius = 16.0
 font_size = 23
 
 [node name="MeleeEnemy" type="CharacterBody2D"]
-script = ExtResource("1_b5e06")
+script = ExtResource("1_02wp3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [node name="AttackRange" type="Area2D" parent="."]
