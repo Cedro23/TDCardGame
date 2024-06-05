@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://bl8xc53ebchfy"]
+
+[ext_resource type="Script" path="res://scripts/enemies/melee_enemy.gd" id="1_b5e06"]
+[ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/enemies/enemy_state_machine.tscn" id="2_rmnyg"]
+[ext_resource type="Script" path="res://scripts/enemies/alert_state.gd" id="3_q4ba4"]
+[ext_resource type="Script" path="res://scripts/enemies/aggro_state.gd" id="4_pfile"]
+[ext_resource type="Script" path="res://scripts/enemies/attack_state.gd" id="5_c2208"]
+[ext_resource type="Script" path="res://scripts/tools/state_debug.gd" id="6_cytqf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e3igx"]
+radius = 28.0179
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xyw2v"]
+radius = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_2bupw"]
+font_size = 23
+
+[node name="MeleeEnemy" type="CharacterBody2D"]
+script = ExtResource("1_b5e06")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource("CircleShape2D_e3igx")
+debug_color = Color(1, 0.137255, 0.12549, 0.419608)
+
+[node name="EnemyHitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xyw2v")
+
+[node name="EnemyStateMachine" parent="." node_paths=PackedStringArray("enemy", "current_state") instance=ExtResource("2_rmnyg")]
+enemy = NodePath("..")
+current_state = NodePath("Alert")
+
+[node name="Alert" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("3_q4ba4")
+
+[node name="Aggro" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("4_pfile")
+
+[node name="Attack" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("5_c2208")
+
+[node name="StateDebug" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -52.0
+offset_top = -49.0
+offset_right = 52.0
+offset_bottom = -17.0
+text = "State"
+label_settings = SubResource("LabelSettings_2bupw")
+horizontal_alignment = 1
+script = ExtResource("6_cytqf")
+state_machine = NodePath("../EnemyStateMachine")
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="AttackRange" to="EnemyStateMachine/Aggro" method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="EnemyStateMachine/Attack" method="_on_attack_range_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="EnemyStateMachine/Attack" method="_on_attack_timer_timeout"]
