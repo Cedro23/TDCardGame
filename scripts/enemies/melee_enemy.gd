@@ -7,10 +7,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float):
+func _process(_delta: float):
 	if _target != null && state_machine.can_move():
 			var direction_to_target = (_target.position - global_position).normalized()
-			move_and_collide(direction_to_target * _speed * delta)
+			velocity = direction_to_target * _speed
+			move_and_slide()
 
 func attack():
 	_target.take_damage(_attack_damage)

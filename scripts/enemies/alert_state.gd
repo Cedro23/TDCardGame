@@ -2,7 +2,7 @@ extends State
 class_name AlertState
 
 func enter():
-	enemy._attack_timer.wait_time = enemy._attack_cooldown
+	pass
 
 func process(_delta:float):
 	if enemy._target == null:

@@ -22,7 +22,6 @@ var _target: Building = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_hp = _max_hp
-	_attack_timer.wait_time = _attack_cooldown
 
 func attack():
 	pass
