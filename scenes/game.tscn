@@ -12,7 +12,7 @@ size = Vector2(20, 224)
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("1_yce7x")]
 position = Vector2(-155, 14)
-motion_mode = 1
+_speed = 1000.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
