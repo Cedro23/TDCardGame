@@ -1,21 +1,26 @@
 extends State
 class_name AttackState
 
-var can_attack: bool = true
+var can_attack: bool = false
 
 func enter():
-	pass
+	enemy.attack_timer.start()
+
 
 func process(_delta):
+	if enemy.target == null or not target_in_range():
+		transitioned.emit("alert")
 	if can_attack:
 		can_attack = false
-		enemy.attack()
-		enemy._attack_timer.start()
+		attack()
+		enemy.attack_timer.start()
 
-func _on_attack_range_body_exited(body:Building):
-	if body == enemy._target:
-		enemy._target = null
-		transitioned.emit("alert")
+func attack():
+	enemy.target.take_damage(enemy.attack_damage)
 
 func _on_attack_timer_timeout():
 	can_attack = true
+
+func target_in_range() -> bool:
+	var distance = enemy.position.distance_to(enemy.target.position)
+	return distance <= enemy.attack_range

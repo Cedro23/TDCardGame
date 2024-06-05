@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://bpgcemahdqh3q"]
+
+[ext_resource type="Script" path="res://scripts/enemies/basic_enemy.gd" id="1_bri4b"]
+[ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/enemies/enemy_state_machine.tscn" id="2_6omv4"]
+[ext_resource type="Script" path="res://scripts/enemies/alert_state.gd" id="3_cinbb"]
+[ext_resource type="Script" path="res://scripts/enemies/aggro_state.gd" id="4_43v6s"]
+[ext_resource type="Script" path="res://scripts/enemies/attack_state.gd" id="5_yy6q0"]
+[ext_resource type="Script" path="res://scripts/tools/state_debug.gd" id="6_1plag"]
+[ext_resource type="Script" path="res://scripts/tools/target_debug.gd" id="7_lqhyr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_242il"]
+radius = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_n6va3"]
+font_size = 23
+
+[sub_resource type="LabelSettings" id="LabelSettings_hlch6"]
+font_size = 12
+
+[node name="RangedEnemy" type="CharacterBody2D"]
+script = ExtResource("1_bri4b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="EnemyHitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_242il")
+
+[node name="EnemyStateMachine" parent="." node_paths=PackedStringArray("enemy", "current_state") instance=ExtResource("2_6omv4")]
+enemy = NodePath("..")
+current_state = NodePath("Alert")
+
+[node name="Alert" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("3_cinbb")
+can_move = null
+
+[node name="Aggro" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("4_43v6s")
+
+[node name="Attack" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("5_yy6q0")
+can_move = false
+
+[node name="StateDebug" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -52.0
+offset_top = -49.0
+offset_right = 52.0
+offset_bottom = -17.0
+text = "State"
+label_settings = SubResource("LabelSettings_n6va3")
+horizontal_alignment = 1
+script = ExtResource("6_1plag")
+state_machine = NodePath("../EnemyStateMachine")
+
+[node name="TargetDebug" type="Label" parent="." node_paths=PackedStringArray("enemy")]
+offset_left = -54.0
+offset_top = -59.0
+offset_right = 54.0
+offset_bottom = -42.0
+text = "Target"
+label_settings = SubResource("LabelSettings_hlch6")
+horizontal_alignment = 1
+script = ExtResource("7_lqhyr")
+enemy = NodePath("..")
+
+[connection signal="timeout" from="AttackTimer" to="EnemyStateMachine/Attack" method="_on_attack_timer_timeout"]

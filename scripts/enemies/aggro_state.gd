@@ -1,10 +1,11 @@
 extends State
 class_name AggroState
 
-#? Is it supposed to be here ?
-func process(_delta):
-	pass
+func process(_delta: float):
+	if enemy.target != null && can_move:
+		var direction_to_target = (enemy.target.position - enemy.global_position).normalized()
+		enemy.velocity = direction_to_target * enemy.speed
+		enemy.move_and_slide()
 
-func _on_attack_range_body_entered(body: Node2D):
-	if body == enemy._target:
-		transitioned.emit("attack")
+		if enemy.target_in_range():
+			transitioned.emit("attack")

@@ -8,21 +8,31 @@ class_name Enemy
 var _hp:float 
 
 @export_group("Attack stats")
-@export var _attack_damage: float = 10.0
-## Seconds to wait before attacking again
-@export var _attack_cooldown: float = 1.0
-@onready var _attack_timer: Timer = $AttackTimer
+@export var attack_damage: float = 100.0
+@export var attack_range: float = 100.0
+@onready var attack_timer: Timer = $AttackTimer
 
-@export_group("Miscellaneous stats")
-@export var _speed: float = 100.0
+@export_group("Movement stats")
+@export var speed: float = 100.0
 
-
-var _target: Building = null
+var target: Building = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_hp = _max_hp
 
-func attack():
+func _process(_delta: float):
 	pass
 
+func take_damage(damage: float):
+	_hp -= damage
+	print(name + " has " + str(_hp) + "hp left")
+	if _hp <= 0:
+		_die()
+
+func _die():
+	queue_free()
+
+func target_in_range() -> bool:
+	var distance = position.distance_to(target.position)
+	return distance <= attack_range

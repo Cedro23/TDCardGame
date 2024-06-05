@@ -5,22 +5,25 @@ class_name BasicEnemy
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
-	if _target != null && state_machine.can_move():
-			var direction_to_target = (_target.position - global_position).normalized()
-			velocity = direction_to_target * _speed
-			move_and_slide()
+	if target == null:
+		target = get_target()
+		if target != null:
+			target.destroyed.connect(_on_target_destroyed)
+	
 
-func attack():
-	_target.take_damage(_attack_damage)
+func get_target():
+	var closest_building: Building = null
+	var buildings = get_tree().get_nodes_in_group("Building")
 
-func take_damage(damage: float):
-	_hp -= damage
-	print(name + " has " + str(_hp) + "hp left")
-	if _hp <= 0:
-		_die()
+	for b in buildings:
+		var distance = position.distance_to(b.position)
+		if closest_building == null or distance < closest_building.position.distance_to(b.position):
+			closest_building = b
 
-func _die():
-	queue_free()
+	return closest_building
+
+func _on_target_destroyed():
+	target.destroyed.disconnect(_on_target_destroyed)
+	target = null
