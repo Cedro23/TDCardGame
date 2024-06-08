@@ -7,10 +7,12 @@ func enter():
 	enemy.attack_timer.start()
 
 
-func process(_delta):
+func process_physics(_delta: float):
 	if enemy.target == null or not target_in_range():
 		enemy.attack_timer.stop()
 		transitioned.emit("alert")
+		
+func process(_delta: float):
 	if can_attack:
 		attack()
 		enemy.attack_timer.start()
