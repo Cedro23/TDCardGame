@@ -11,6 +11,8 @@ class_name Enemy
 
 @export_group("Movement stats")
 @export var speed: float = 100.0
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var nav_timer: Timer = $NavigationTimer
 
 var target: Building = null
 

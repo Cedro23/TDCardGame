@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://te361f61yiw1"
-path="res://.godot/imported/healthbarProgress.png-b1e08ec384a1f16870de970b16979987.ctex"
+uid="uid://ci41w7rbed65y"
+path="res://.godot/imported/Tilemap_Flat.png-4a66e499fdf33c2d8a067e3afcea239e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/healthbarProgress.png"
-dest_files=["res://.godot/imported/healthbarProgress.png-b1e08ec384a1f16870de970b16979987.ctex"]
+source_file="res://assets/art/tileset/Tilemap_Flat.png"
+dest_files=["res://.godot/imported/Tilemap_Flat.png-4a66e499fdf33c2d8a067e3afcea239e.ctex"]
 
 [params]
 
