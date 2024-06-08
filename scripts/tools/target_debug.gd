@@ -1,10 +1,10 @@
 extends Label
 
-@export var enemy: Enemy
+@export var entity: Entity
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if enemy.target != null:
-		text = enemy.target.name
+	if entity.target != null:
+		text = entity.target.name
 	else:
 		text = "None"

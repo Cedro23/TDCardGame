@@ -28,12 +28,13 @@ one_shot = true
 [node name="EnemyHitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xyw2v")
 
-[node name="EnemyStateMachine" parent="." node_paths=PackedStringArray("enemy", "current_state") instance=ExtResource("2_rmnyg")]
-enemy = NodePath("..")
+[node name="EnemyStateMachine" parent="." node_paths=PackedStringArray("entity", "current_state") instance=ExtResource("2_rmnyg")]
+entity = NodePath("..")
 current_state = NodePath("Alert")
 
 [node name="Alert" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("3_q4ba4")
+can_move = null
 
 [node name="Aggro" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("4_pfile")
@@ -53,7 +54,7 @@ horizontal_alignment = 1
 script = ExtResource("6_cytqf")
 state_machine = NodePath("../EnemyStateMachine")
 
-[node name="TargetDebug" type="Label" parent="." node_paths=PackedStringArray("enemy")]
+[node name="TargetDebug" type="Label" parent="." node_paths=PackedStringArray("entity")]
 offset_left = -54.0
 offset_top = -59.0
 offset_right = 54.0
@@ -62,6 +63,6 @@ text = "Target"
 label_settings = SubResource("LabelSettings_5wudp")
 horizontal_alignment = 1
 script = ExtResource("7_rfue3")
-enemy = NodePath("..")
+entity = NodePath("..")
 
 [connection signal="timeout" from="AttackTimer" to="EnemyStateMachine/Attack" method="_on_attack_timer_timeout"]

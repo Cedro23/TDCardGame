@@ -6,7 +6,7 @@ signal transitioned(new_state_name: StringName)
 @export var can_move: bool = true
 var next_state: State
 
-var enemy: Entity
+var entity: Entity
 
 func handle_input(_event: InputEvent):
 	pass

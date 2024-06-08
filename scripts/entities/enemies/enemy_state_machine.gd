@@ -12,7 +12,7 @@ func _ready():
 			
 			# Connect to the state changed signal
 			child.transitioned.connect(_on_state_changed)
-			child.enemy = entity
+			child.entity = entity
 		else:
 			push_warning('Child' + child.name + ' is not a State for CharacterStateMachine.')
 

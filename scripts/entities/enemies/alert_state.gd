@@ -5,5 +5,5 @@ func enter():
 	pass
 
 func process(_delta: float):
-	if enemy.target != null:
+	if entity.target != null:
 		transitioned.emit("aggro")

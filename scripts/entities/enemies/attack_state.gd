@@ -4,26 +4,26 @@ class_name AttackState
 var can_attack: bool = false
 
 func enter():
-	enemy.attack_timer.start()
+	entity.attack_timer.start()
 
 
 func process_physics(_delta: float):
-	if enemy.target == null or not target_in_range():
-		enemy.attack_timer.stop()
+	if entity.target == null or not target_in_range():
+		entity.attack_timer.stop()
 		transitioned.emit("alert")
 		
 func process(_delta: float):
 	if can_attack:
 		attack()
-		enemy.attack_timer.start()
+		entity.attack_timer.start()
 
 func attack():
-	enemy.target.take_damage(enemy.attack_damage)
+	entity.target.take_damage(entity.attack_damage)
 	can_attack = false
 
 func _on_attack_timer_timeout():
 	can_attack = true
 
 func target_in_range() -> bool:
-	var distance = enemy.position.distance_to(enemy.target.position)
-	return distance <= enemy.attack_range
+	var distance = entity.position.distance_to(entity.target.position)
+	return distance <= entity.attack_range
