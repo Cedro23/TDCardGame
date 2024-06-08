@@ -8,7 +8,7 @@ func enter():
 
 
 func process_physics(_delta: float):
-	if entity.target == null or not target_in_range():
+	if entity.target == null or not entity.target_in_range():
 		entity.attack_timer.stop()
 		transitioned.emit("alert")
 		
@@ -23,7 +23,3 @@ func attack():
 
 func _on_attack_timer_timeout():
 	can_attack = true
-
-func target_in_range() -> bool:
-	var distance = entity.position.distance_to(entity.target.position)
-	return distance <= entity.attack_range

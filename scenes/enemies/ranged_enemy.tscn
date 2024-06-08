@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bpgcemahdqh3q"]
+[gd_scene load_steps=11 format=3 uid="uid://bpgcemahdqh3q"]
 
 [ext_resource type="Script" path="res://scripts/entities/enemies/basic_enemy.gd" id="1_bri4b"]
 [ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/enemies/enemy_state_machine.tscn" id="2_6omv4"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://hn1cbwiypoej" path="res://scenes/debug/state_debug.tscn" id="7_8o0qp"]
 [ext_resource type="PackedScene" uid="uid://dxdeyygyumltw" path="res://scenes/debug/target_debug.tscn" id="7_yv7r8"]
 [ext_resource type="PackedScene" uid="uid://ck0kwdcf7k48w" path="res://scenes/hud/health_bar.tscn" id="8_w1c1p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0vw2"]
+radius = 151.268
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_242il"]
 radius = 16.0
@@ -20,8 +23,15 @@ script = ExtResource("1_bri4b")
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="EnemyHitBox" type="CollisionShape2D" parent="."]
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource("CircleShape2D_m0vw2")
+debug_color = Color(0.705882, 0.490196, 0, 0.419608)
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_242il")
+debug_color = Color(0.996078, 0, 0, 0.419608)
 
 [node name="EnemyStateMachine" parent="." node_paths=PackedStringArray("entity", "current_state") instance=ExtResource("2_6omv4")]
 entity = NodePath("..")
@@ -39,6 +49,7 @@ script = ExtResource("5_yy6q0")
 can_move = false
 
 [node name="Debug" type="Node2D" parent="."]
+position = Vector2(0, -19)
 
 [node name="TargetDebug" parent="Debug" node_paths=PackedStringArray("entity") instance=ExtResource("7_yv7r8")]
 offset_top = -49.0
@@ -48,11 +59,10 @@ entity = NodePath("../..")
 [node name="StateDebug" parent="Debug" node_paths=PackedStringArray("state_machine") instance=ExtResource("7_8o0qp")]
 state_machine = NodePath("../../EnemyStateMachine")
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("8_w1c1p")]
-offset_left = 544.0
-offset_top = 319.0
-offset_right = 608.0
-offset_bottom = 329.0
-entity = NodePath("..")
+[node name="HealthBar" parent="Debug" node_paths=PackedStringArray("entity") instance=ExtResource("8_w1c1p")]
+visible = false
+offset_top = -13.0
+offset_bottom = -3.0
+entity = NodePath("../..")
 
 [connection signal="timeout" from="AttackTimer" to="EnemyStateMachine/Attack" method="_on_attack_timer_timeout"]

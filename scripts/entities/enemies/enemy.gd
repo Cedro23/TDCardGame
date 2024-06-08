@@ -5,9 +5,9 @@ class_name Enemy
 
 @export_group("Attack stats")
 @export var attack_damage: float = 100.0
-@export var attack_range: float = 100.0
 @export var attack_cooldown: float = 1.0
 @onready var attack_timer: Timer = $AttackTimer
+@onready var attack_range: Area2D = $AttackRange
 
 @export_group("Movement stats")
 @export var speed: float = 100.0
@@ -55,5 +55,8 @@ func _die():
 	queue_free()
 
 func target_in_range() -> bool:
-	var distance = position.distance_to(target.position)
-	return distance <= attack_range
+	var overlapping_bodies = attack_range.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body == target:
+			return true
+	return false
