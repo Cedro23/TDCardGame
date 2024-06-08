@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmpguaw5abup"]
+
+[ext_resource type="Script" path="res://scripts/entities/buildings/building.gd" id="1_8yitq"]
+[ext_resource type="PackedScene" uid="uid://ck0kwdcf7k48w" path="res://scenes/hud/health_bar.tscn" id="2_jvx4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_he7m6"]
+
+[node name="BasicBuilding" type="CharacterBody2D" groups=["Building"]]
+position = Vector2(27, -52)
+script = ExtResource("1_8yitq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_he7m6")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("2_jvx4j")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = -24.0
+offset_bottom = -14.0
+grow_horizontal = 1
+grow_vertical = 1
+entity = NodePath("..")

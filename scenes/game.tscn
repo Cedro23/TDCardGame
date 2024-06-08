@@ -1,9 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmlgh8lodh2rm"]
+[gd_scene load_steps=3 format=3 uid="uid://dmlgh8lodh2rm"]
 
+[ext_resource type="PackedScene" uid="uid://cmpguaw5abup" path="res://scenes/buildings/basic_building.tscn" id="1_n2b3x"]
 [ext_resource type="PackedScene" uid="uid://bl8xc53ebchfy" path="res://scenes/enemies/melee_enemy.tscn" id="1_yce7x"]
-[ext_resource type="Script" path="res://scripts/entities/buildings/building.gd" id="2_qwapg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_he7m6"]
 
 [node name="Game" type="Node2D"]
 
@@ -12,29 +10,23 @@ zoom = Vector2(2, 2)
 
 [node name="Buildings" type="Node" parent="."]
 
-[node name="TestBuilding" type="CharacterBody2D" parent="Buildings" groups=["Building"]]
-position = Vector2(27, -52)
-script = ExtResource("2_qwapg")
+[node name="TestBuilding" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(-6, -76)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/TestBuilding"]
-shape = SubResource("RectangleShape2D_he7m6")
+[node name="TestBuilding2" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(41, 60)
 
-[node name="TestBuilding2" type="CharacterBody2D" parent="Buildings" groups=["Building"]]
-position = Vector2(74, -13)
-script = ExtResource("2_qwapg")
+[node name="TestBuilding3" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(-98, -15)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/TestBuilding2"]
-shape = SubResource("RectangleShape2D_he7m6")
+[node name="TestBuilding4" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(97, -63)
 
-[node name="TestBuilding3" type="CharacterBody2D" parent="Buildings" groups=["Building"]]
-position = Vector2(-43, 45)
-script = ExtResource("2_qwapg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/TestBuilding3"]
-shape = SubResource("RectangleShape2D_he7m6")
+[node name="TestBuilding5" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(8, 2)
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("1_yce7x")]
-position = Vector2(-181, 83)
+position = Vector2(-162, 65)
 attack_damage = 20.0
 attack_range = 30.0
 
