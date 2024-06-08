@@ -45,15 +45,6 @@ func _on_target_destroyed():
 	target.destroyed.disconnect(_on_target_destroyed)
 	target = null
 
-func take_damage(damage: float):
-	_hp -= damage
-	print(name + " has " + str(_hp) + "hp left")
-	if _hp <= 0:
-		_die()
-
-func _die():
-	queue_free()
-
 func target_in_range() -> bool:
 	var overlapping_bodies = attack_range.get_overlapping_bodies()
 	for body in overlapping_bodies:

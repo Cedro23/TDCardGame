@@ -11,32 +11,88 @@
 [node name="Buildings" type="Node" parent="."]
 
 [node name="BasicBuilding" parent="Buildings" instance=ExtResource("1_n2b3x")]
-position = Vector2(-15, -98)
+position = Vector2(-123, -103)
 
 [node name="BasicBuilding2" parent="Buildings" instance=ExtResource("1_n2b3x")]
-position = Vector2(104, 102)
+position = Vector2(-238, 177)
 
 [node name="BasicBuilding3" parent="Buildings" instance=ExtResource("1_n2b3x")]
-position = Vector2(-215, -69)
+position = Vector2(-260, -69)
 
 [node name="BasicBuilding4" parent="Buildings" instance=ExtResource("1_n2b3x")]
-position = Vector2(207, -88)
+position = Vector2(-135, -13)
 
 [node name="BasicBuilding5" parent="Buildings" instance=ExtResource("1_n2b3x")]
-position = Vector2(-85, 99)
+position = Vector2(-130, 99)
 
-[node name="MeleeEnemy" parent="." instance=ExtResource("1_yce7x")]
-position = Vector2(-162, 65)
+[node name="BasicBuilding7" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(-230, 51)
+
+[node name="BasicBuilding8" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(-61, 41)
+
+[node name="BasicBuilding9" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(-242, -193)
+
+[node name="BasicBuilding6" parent="Buildings" instance=ExtResource("1_n2b3x")]
+position = Vector2(-421, 0)
+scale = Vector2(10, 10)
+_max_hp = 1000.0
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="MeleeEnemy" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(703, 116)
 attack_damage = 20.0
 
-[node name="MeleeEnemy2" parent="." instance=ExtResource("1_yce7x")]
-position = Vector2(-99, -145)
+[node name="MeleeEnemy2" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(766, -94)
 attack_damage = 20.0
 
-[node name="MeleeEnemy3" parent="." instance=ExtResource("1_yce7x")]
-position = Vector2(172, 28)
+[node name="MeleeEnemy3" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(610, -33)
 attack_damage = 20.0
 
-[node name="RangedEnemy" parent="." instance=ExtResource("3_0ki4s")]
-position = Vector2(445, -288)
+[node name="MeleeEnemy4" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(709, 15)
+attack_damage = 20.0
+
+[node name="MeleeEnemy5" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(772, -195)
+attack_damage = 20.0
+
+[node name="MeleeEnemy6" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(616, -134)
+attack_damage = 20.0
+
+[node name="MeleeEnemy7" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(722, -59)
+attack_damage = 20.0
+
+[node name="MeleeEnemy8" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(785, -269)
+attack_damage = 20.0
+
+[node name="MeleeEnemy9" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(629, -208)
+attack_damage = 20.0
+
+[node name="MeleeEnemy10" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(714, 218)
+attack_damage = 20.0
+
+[node name="MeleeEnemy11" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(777, 8)
+attack_damage = 20.0
+
+[node name="MeleeEnemy12" parent="Enemies" instance=ExtResource("1_yce7x")]
+position = Vector2(621, 69)
+attack_damage = 20.0
+
+[node name="RangedEnemy" parent="Enemies" instance=ExtResource("3_0ki4s")]
+position = Vector2(929, -13)
+attack_damage = 35.0
+
+[node name="RangedEnemy2" parent="Enemies" instance=ExtResource("3_0ki4s")]
+position = Vector2(925, -114)
 attack_damage = 35.0
