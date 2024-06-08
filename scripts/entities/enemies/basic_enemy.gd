@@ -10,9 +10,11 @@ func _process(_delta: float):
 	
 
 func get_target():
+	# TODO: Get buildings from player_manager
 	var closest_building: Building = null
 	var buildings = get_tree().get_nodes_in_group("Building")
 
+	# TODO: Change distance computation to make it work better
 	for b in buildings:
 		var distance = position.distance_to(b.position)
 		if closest_building == null or distance < closest_building.position.distance_to(b.position):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmlgh8lodh2rm"]
 
 [ext_resource type="PackedScene" uid="uid://bl8xc53ebchfy" path="res://scenes/enemies/melee_enemy.tscn" id="1_yce7x"]
-[ext_resource type="Script" path="res://scripts/buildings/building.gd" id="2_qwapg"]
+[ext_resource type="Script" path="res://scripts/entities/buildings/building.gd" id="2_qwapg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_he7m6"]
 

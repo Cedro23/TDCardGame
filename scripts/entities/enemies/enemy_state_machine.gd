@@ -1,7 +1,7 @@
 extends Node
 class_name EnemyStateMachine
 
-@export var enemy: Enemy
+@export var enemy: Entity
 @export var current_state: State
 var states: Dictionary = {}
 

@@ -1,11 +1,7 @@
-extends CharacterBody2D
+extends Entity
 class_name Enemy
 
 @onready var state_machine: EnemyStateMachine = $EnemyStateMachine
-
-@export_group("Defense stats")
-@export var _max_hp: float = 100.0
-var _hp:float 
 
 @export_group("Attack stats")
 @export var attack_damage: float = 100.0

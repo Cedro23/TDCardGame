@@ -1,12 +1,7 @@
-extends Node
+extends Entity
 class_name Building
 
-@export_group("Health stats")
-@export var _max_hp: float = 100.0
-var _hp:float
-
 signal destroyed()
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://bpgcemahdqh3q"]
 
-[ext_resource type="Script" path="res://scripts/enemies/basic_enemy.gd" id="1_bri4b"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/basic_enemy.gd" id="1_bri4b"]
 [ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/enemies/enemy_state_machine.tscn" id="2_6omv4"]
-[ext_resource type="Script" path="res://scripts/enemies/alert_state.gd" id="3_cinbb"]
-[ext_resource type="Script" path="res://scripts/enemies/aggro_state.gd" id="4_43v6s"]
-[ext_resource type="Script" path="res://scripts/enemies/attack_state.gd" id="5_yy6q0"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/alert_state.gd" id="3_cinbb"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/aggro_state.gd" id="4_43v6s"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/attack_state.gd" id="5_yy6q0"]
 [ext_resource type="Script" path="res://scripts/tools/state_debug.gd" id="6_1plag"]
 [ext_resource type="Script" path="res://scripts/tools/target_debug.gd" id="7_lqhyr"]
 
