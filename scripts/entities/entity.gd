@@ -1,16 +1,21 @@
 extends CharacterBody2D
 class_name Entity
 
+signal destroyed()
 
 @export_group("Defense stats")
 @export var _max_hp: float = 100.0
 var _hp:float 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	_hp = _max_hp
 
+func take_damage(damage: float):
+	_hp -= damage
+	print(name + " has " + str(_hp) + "hp left")
+	if _hp <= 0:
+		_die()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _die():
+	destroyed.emit()
+	queue_free()
