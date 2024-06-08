@@ -1,21 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bl8xc53ebchfy"]
+[gd_scene load_steps=9 format=3 uid="uid://bl8xc53ebchfy"]
 
 [ext_resource type="Script" path="res://scripts/entities/enemies/basic_enemy.gd" id="1_02wp3"]
 [ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/enemies/enemy_state_machine.tscn" id="2_rmnyg"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/alert_state.gd" id="3_q4ba4"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/aggro_state.gd" id="4_pfile"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/attack_state.gd" id="5_c2208"]
-[ext_resource type="Script" path="res://scripts/tools/state_debug.gd" id="6_cytqf"]
-[ext_resource type="Script" path="res://scripts/tools/target_debug.gd" id="7_rfue3"]
+[ext_resource type="PackedScene" uid="uid://hn1cbwiypoej" path="res://scenes/debug/state_debug.tscn" id="6_is40x"]
+[ext_resource type="PackedScene" uid="uid://dxdeyygyumltw" path="res://scenes/debug/target_debug.tscn" id="7_wusas"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xyw2v"]
 radius = 16.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_2bupw"]
-font_size = 23
-
-[sub_resource type="LabelSettings" id="LabelSettings_5wudp"]
-font_size = 12
 
 [node name="MeleeEnemy" type="CharacterBody2D"]
 script = ExtResource("1_02wp3")
@@ -43,26 +37,12 @@ script = ExtResource("4_pfile")
 script = ExtResource("5_c2208")
 can_move = false
 
-[node name="StateDebug" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-offset_left = -52.0
-offset_top = -49.0
-offset_right = 52.0
-offset_bottom = -17.0
-text = "State"
-label_settings = SubResource("LabelSettings_2bupw")
-horizontal_alignment = 1
-script = ExtResource("6_cytqf")
+[node name="StateDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("6_is40x")]
 state_machine = NodePath("../EnemyStateMachine")
 
-[node name="TargetDebug" type="Label" parent="." node_paths=PackedStringArray("entity")]
-offset_left = -54.0
-offset_top = -59.0
-offset_right = 54.0
-offset_bottom = -42.0
-text = "Target"
-label_settings = SubResource("LabelSettings_5wudp")
-horizontal_alignment = 1
-script = ExtResource("7_rfue3")
+[node name="TargetDebug" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("7_wusas")]
+offset_top = -54.0
+offset_bottom = -36.0
 entity = NodePath("..")
 
 [connection signal="timeout" from="AttackTimer" to="EnemyStateMachine/Attack" method="_on_attack_timer_timeout"]

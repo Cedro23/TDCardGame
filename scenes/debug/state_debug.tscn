@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://hn1cbwiypoej"]
+
+[ext_resource type="FontFile" uid="uid://bylvoyi54agvx" path="res://assets/fonts/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="1_ltfai"]
+[ext_resource type="Script" path="res://scripts/tools/state_debug.gd" id="2_h7mdu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6lh3j"]
+font = ExtResource("1_ltfai")
+
+[node name="StateDebug" type="Label" node_paths=PackedStringArray("state_machine")]
+offset_left = -52.0
+offset_top = -33.0
+offset_right = 52.0
+offset_bottom = -15.0
+text = "State"
+label_settings = SubResource("LabelSettings_6lh3j")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_h7mdu")
+state_machine = NodePath("")

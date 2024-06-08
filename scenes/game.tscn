@@ -34,6 +34,16 @@ script = ExtResource("2_qwapg")
 shape = SubResource("RectangleShape2D_he7m6")
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("1_yce7x")]
-position = Vector2(-148, -67)
+position = Vector2(-181, 83)
+attack_damage = 20.0
+attack_range = 30.0
+
+[node name="MeleeEnemy2" parent="." instance=ExtResource("1_yce7x")]
+position = Vector2(-99, -145)
+attack_damage = 20.0
+attack_range = 30.0
+
+[node name="MeleeEnemy3" parent="." instance=ExtResource("1_yce7x")]
+position = Vector2(172, 28)
 attack_damage = 20.0
 attack_range = 30.0

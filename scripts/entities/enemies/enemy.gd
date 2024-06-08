@@ -33,9 +33,6 @@ func get_target():
 	var shortest_distance: float
 	var buildings = get_tree().get_nodes_in_group("Building")
 
-	print(len(buildings))
-
-	# TODO: Change distance computation to make it work better
 	for b in buildings:
 		var distance = position.distance_to(b.position)
 		if closest_building == null or distance < shortest_distance:
