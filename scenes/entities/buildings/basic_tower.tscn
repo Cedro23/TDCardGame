@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://c0tkinbukljpn"]
+
+[ext_resource type="PackedScene" uid="uid://hn1cbwiypoej" path="res://scenes/debug/state_debug.tscn" id="1_21jkc"]
+[ext_resource type="Script" path="res://scripts/entities/buildings/combat_building.gd" id="1_ndjtb"]
+[ext_resource type="PackedScene" uid="uid://dxdeyygyumltw" path="res://scenes/debug/target_debug.tscn" id="2_ij8qb"]
+[ext_resource type="PackedScene" uid="uid://ck0kwdcf7k48w" path="res://scenes/hud/health_bar.tscn" id="2_jvx4j"]
+[ext_resource type="Script" path="res://scripts/entities/alert_state.gd" id="3_4co3l"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/attack_state.gd" id="4_jtxku"]
+[ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/entities/state_machine.tscn" id="5_6p2da"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5apbr"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwtw2"]
+radius = 16.0
+
+[node name="BasicTower" type="CharacterBody2D" groups=["Building"]]
+collision_mask = 2
+script = ExtResource("1_ndjtb")
+attack_damage = 35.0
+attack_cooldown = 0.2
+_max_hp = 200.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="AttackRange" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource("CircleShape2D_5apbr")
+debug_color = Color(0.914947, 8.29774e-05, 0.714501, 0.42)
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dwtw2")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("entity", "current_state") instance=ExtResource("5_6p2da")]
+entity = NodePath("..")
+current_state = NodePath("Alert")
+
+[node name="Alert" type="Node" parent="StateMachine"]
+script = ExtResource("3_4co3l")
+can_move = false
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("4_jtxku")
+can_move = false
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("2_jvx4j")]
+visible = false
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = -29.0
+offset_bottom = -19.0
+grow_vertical = 1
+entity = NodePath("..")
+
+[node name="Debug" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, -13)
+
+[node name="TargetDebug" parent="Debug" node_paths=PackedStringArray("entity") instance=ExtResource("2_ij8qb")]
+offset_bottom = -41.0
+entity = NodePath("../..")
+
+[node name="StateDebug" parent="Debug" node_paths=PackedStringArray("state_machine") instance=ExtResource("1_21jkc")]
+state_machine = NodePath("../../StateMachine")
+
+[connection signal="timeout" from="AttackTimer" to="StateMachine/Attack" method="_on_attack_timer_timeout"]

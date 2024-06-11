@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3hdo8rcvcwj8"]
-
-[ext_resource type="Script" path="res://scripts/entities/enemies/enemy_state_machine.gd" id="1_5ueyt"]
-
-[node name="EnemyStateMachine" type="Node" node_paths=PackedStringArray("current_state")]
-script = ExtResource("1_5ueyt")
-current_state = NodePath("")

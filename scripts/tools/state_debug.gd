@@ -1,6 +1,6 @@
 extends Label
 
-@export var state_machine: EnemyStateMachine
+@export var state_machine: StateMachine
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

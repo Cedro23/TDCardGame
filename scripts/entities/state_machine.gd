@@ -1,5 +1,5 @@
 extends Node
-class_name EnemyStateMachine
+class_name StateMachine
 
 @export var entity: Entity
 @export var current_state: State

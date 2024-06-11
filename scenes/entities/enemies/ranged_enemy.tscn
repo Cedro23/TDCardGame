@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bpgcemahdqh3q"]
 
-[ext_resource type="Script" path="res://scripts/entities/enemies/basic_enemy.gd" id="1_bri4b"]
-[ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/enemies/enemy_state_machine.tscn" id="2_6omv4"]
-[ext_resource type="Script" path="res://scripts/entities/enemies/alert_state.gd" id="3_cinbb"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/enemy.gd" id="1_0v06o"]
+[ext_resource type="PackedScene" uid="uid://d3hdo8rcvcwj8" path="res://scenes/entities/state_machine.tscn" id="2_6omv4"]
+[ext_resource type="Script" path="res://scripts/entities/alert_state.gd" id="3_iieyj"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/aggro_state.gd" id="4_43v6s"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/attack_state.gd" id="5_yy6q0"]
 [ext_resource type="PackedScene" uid="uid://hn1cbwiypoej" path="res://scenes/debug/state_debug.tscn" id="7_8o0qp"]
@@ -20,7 +20,11 @@ collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_bri4b")
+script = ExtResource("1_0v06o")
+speed = null
+attack_damage = null
+attack_cooldown = null
+_max_hp = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
@@ -37,18 +41,17 @@ debug_color = Color(0.705882, 0.490196, 0, 0.419608)
 shape = SubResource("CircleShape2D_242il")
 debug_color = Color(0.996078, 0, 0, 0.419608)
 
-[node name="EnemyStateMachine" parent="." node_paths=PackedStringArray("entity", "current_state") instance=ExtResource("2_6omv4")]
+[node name="StateMachine" parent="." node_paths=PackedStringArray("entity", "current_state") instance=ExtResource("2_6omv4")]
 entity = NodePath("..")
 current_state = NodePath("Alert")
 
-[node name="Alert" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("3_cinbb")
-can_move = null
+[node name="Alert" type="Node" parent="StateMachine"]
+script = ExtResource("3_iieyj")
 
-[node name="Aggro" type="Node" parent="EnemyStateMachine"]
+[node name="Aggro" type="Node" parent="StateMachine"]
 script = ExtResource("4_43v6s")
 
-[node name="Attack" type="Node" parent="EnemyStateMachine"]
+[node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("5_yy6q0")
 can_move = false
 
@@ -59,7 +62,6 @@ offset_bottom = -22.0
 entity = NodePath("..")
 
 [node name="Debug" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, -19)
 
 [node name="TargetDebug" parent="Debug" node_paths=PackedStringArray("entity") instance=ExtResource("7_yv7r8")]
@@ -68,7 +70,7 @@ offset_bottom = -31.0
 entity = NodePath("../..")
 
 [node name="StateDebug" parent="Debug" node_paths=PackedStringArray("state_machine") instance=ExtResource("7_8o0qp")]
-state_machine = NodePath("../../EnemyStateMachine")
+state_machine = NodePath("../../StateMachine")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
@@ -76,5 +78,5 @@ debug_enabled = true
 [node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.06
 
-[connection signal="timeout" from="AttackTimer" to="EnemyStateMachine/Attack" method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="NavigationTimer" to="EnemyStateMachine/Aggro" method="_on_navigation_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="StateMachine/Attack" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="NavigationTimer" to="StateMachine/Aggro" method="_on_navigation_timer_timeout"]
