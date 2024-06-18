@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dnh8yre8mlhue"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1

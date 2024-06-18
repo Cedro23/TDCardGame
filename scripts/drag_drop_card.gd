@@ -1,21 +1,21 @@
-extends RigidBody2D
+extends Node2D
+@onready var game_manager = $".."
 
-var dragging = false
 var t = 4
-@onready var card = $".."
+@onready var card = $"."
+
+func _initialize(position:):
+	card.position = position
 
 func _physics_process(delta):
-	if dragging:
-		
+	if game_manager.dragging:
 		card.position = card.position.lerp(get_global_mouse_position(),delta * t)
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		print(card.global_position)
-		print(get_global_mouse_position())
 		if(get_global_mouse_position() - card.position).length() < 32:
-			if not dragging and event.pressed :
-				dragging = true
-		if dragging and not event.pressed :
-			dragging = false
+			if not game_manager.dragging and event.pressed :
+				game_manager.dragging = true
+		if game_manager.dragging and not event.pressed :
+			game_manager.dragging = false
 		

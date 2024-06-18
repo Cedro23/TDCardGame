@@ -43,19 +43,19 @@ animations = [{
 }]
 
 [node name="Card" type="Node2D"]
+script = ExtResource("1_cuuri")
 metadata/Name = ""
 metadata/Description = ""
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="scriptbody" type="RigidBody2D" parent="."]
 input_pickable = true
 gravity_scale = 0.0
-script = ExtResource("1_cuuri")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scriptbody"]
 position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_5qdwe")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="scriptbody"]
 sprite_frames = SubResource("SpriteFrames_mettb")
 
-[connection signal="input_event" from="RigidBody2D" to="RigidBody2D" method="_on_input_event"]
+[connection signal="input_event" from="scriptbody" to="scriptbody" method="_on_input_event"]
