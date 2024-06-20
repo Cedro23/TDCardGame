@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyt5gqnpn38wo"]
+
+[ext_resource type="Script" path="res://scripts/tools/debug_manager.gd" id="1_rse5b"]
+
+[node name="DebugManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rse5b")
+
+[node name="BtnSpawnWave" type="Button" parent="."]
+offset_right = 104.0
+offset_bottom = 37.0
+text = "Spawn wave"
+
+[connection signal="pressed" from="BtnSpawnWave" to="." method="_on_btn_spawn_wave_pressed"]

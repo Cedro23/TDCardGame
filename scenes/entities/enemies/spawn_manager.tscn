@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://cgi6t6v6iys73"]
+
+[ext_resource type="Script" path="res://scripts/entities/enemies/spawn_manager.gd" id="1_836bu"]
+[ext_resource type="PackedScene" uid="uid://bl8xc53ebchfy" path="res://scenes/entities/enemies/melee_enemy.tscn" id="2_vbrnx"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/spawn_infos.gd" id="3_qs7du"]
+[ext_resource type="PackedScene" uid="uid://bpgcemahdqh3q" path="res://scenes/entities/enemies/ranged_enemy.tscn" id="4_gsh0h"]
+[ext_resource type="FontFile" uid="uid://bylvoyi54agvx" path="res://assets/fonts/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="5_8d0t1"]
+
+[sub_resource type="Resource" id="Resource_07tge"]
+script = ExtResource("3_qs7du")
+enemy = ExtResource("2_vbrnx")
+enemy_quantity = 5
+
+[sub_resource type="Resource" id="Resource_fwbj0"]
+script = ExtResource("3_qs7du")
+enemy = ExtResource("4_gsh0h")
+enemy_quantity = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnm3m"]
+size = Vector2(100, 756)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ju5js"]
+font = ExtResource("5_8d0t1")
+font_size = 32
+
+[node name="SpawnManager" type="Node2D"]
+script = ExtResource("1_836bu")
+spawn_infos = Array[ExtResource("3_qs7du")]([SubResource("Resource_07tge"), SubResource("Resource_fwbj0")])
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_jnm3m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LblEnemyCounter" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -210.0
+offset_bottom = 36.0
+grow_horizontal = 0
+text = "Enemies left : 0"
+label_settings = SubResource("LabelSettings_ju5js")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
