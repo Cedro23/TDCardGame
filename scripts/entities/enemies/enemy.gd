@@ -1,7 +1,7 @@
 extends CombatEntity
 class_name Enemy
 
-@onready var state_machine: StateMachine = $EnemyStateMachine
+@onready var state_machine: StateMachine = $StateMachine
 
 @export_group("Movement stats")
 @export var speed: float = 100.0
