@@ -11,6 +11,5 @@ script = ExtResource("1_3jr7v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="DebugManager" parent="CanvasLayer" node_paths=PackedStringArray("spawn_manager") instance=ExtResource("3_7m6en")]
-visible = false
-spawn_manager = NodePath("../../SpawnManager")
+[node name="DebugManager" parent="CanvasLayer" node_paths=PackedStringArray("_spawn_manager") instance=ExtResource("3_7m6en")]
+_spawn_manager = NodePath("../../SpawnManager")
