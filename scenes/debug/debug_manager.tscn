@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyt5gqnpn38wo"]
+[gd_scene load_steps=7 format=3 uid="uid://dyt5gqnpn38wo"]
 
 [ext_resource type="Script" path="res://scripts/tools/debug_manager.gd" id="1_rse5b"]
 [ext_resource type="FontFile" uid="uid://bylvoyi54agvx" path="res://assets/fonts/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="2_gqn37"]
+[ext_resource type="FontFile" uid="uid://br53dmbga0c8k" path="res://assets/fonts/Abaddon_Fonts_v1.2/Abaddon Light.ttf" id="3_6ge6l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s3r3o"]
 font = ExtResource("2_gqn37")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ciq0r"]
+font = ExtResource("2_gqn37")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ledpv"]
+font = ExtResource("3_6ge6l")
 font_size = 32
 
 [node name="DebugManager" type="Control"]
@@ -36,4 +45,70 @@ label_settings = SubResource("LabelSettings_s3r3o")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LblLabels" type="Label" parent="."]
+layout_mode = 0
+offset_top = 42.0
+offset_right = 173.0
+offset_bottom = 314.0
+text = "Labels:"
+label_settings = SubResource("LabelSettings_ciq0r")
+
+[node name="LblEnemies" type="Label" parent="LblLabels"]
+layout_mode = 0
+offset_top = 29.0
+offset_right = 119.0
+offset_bottom = 110.0
+text = "Enemies"
+label_settings = SubResource("LabelSettings_ledpv")
+
+[node name="CkBtnState" type="CheckButton" parent="LblLabels/LblEnemies"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 21.0
+offset_right = 103.0
+offset_bottom = 52.0
+button_pressed = true
+text = "State"
+
+[node name="CkBtnTarget" type="CheckButton" parent="LblLabels/LblEnemies"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 45.0
+offset_right = 113.0
+offset_bottom = 76.0
+button_pressed = true
+text = "Target"
+
+[node name="LblTowers" type="Label" parent="LblLabels"]
+layout_mode = 0
+offset_top = 101.0
+offset_right = 119.0
+offset_bottom = 182.0
+text = "Towers"
+label_settings = SubResource("LabelSettings_ledpv")
+
+[node name="CkBtnState" type="CheckButton" parent="LblLabels/LblTowers"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 21.0
+offset_right = 103.0
+offset_bottom = 52.0
+button_pressed = true
+text = "State"
+flat = true
+
+[node name="CkBtnTarget" type="CheckButton" parent="LblLabels/LblTowers"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 45.0
+offset_right = 113.0
+offset_bottom = 76.0
+button_pressed = true
+text = "Target"
+flat = true
+
 [connection signal="pressed" from="BtnSpawnWave" to="." method="_on_btn_spawn_wave_pressed"]
+[connection signal="toggled" from="LblLabels/LblEnemies/CkBtnState" to="." method="_on_enemy_state_toggled"]
+[connection signal="toggled" from="LblLabels/LblEnemies/CkBtnTarget" to="." method="_on_enemy_target_toggled"]
+[connection signal="toggled" from="LblLabels/LblTowers/CkBtnState" to="." method="_on_tower_state_toggled"]
+[connection signal="toggled" from="LblLabels/LblTowers/CkBtnTarget" to="." method="_on_tower_target_toggled"]

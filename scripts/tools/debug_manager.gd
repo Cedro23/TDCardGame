@@ -17,3 +17,20 @@ func _update_stopwatch(delta: float):
 
 func _on_btn_spawn_wave_pressed():
 	_spawn_manager.spawn_enemies()
+
+func _on_enemy_state_toggled(is_toggled: bool):
+	for e in get_tree().get_nodes_in_group("Enemy"):
+		e.get_node("Debug/StateDebug").visible = is_toggled
+
+func _on_enemy_target_toggled(is_toggled: bool):
+	for e in get_tree().get_nodes_in_group("Enemy"):
+		e.get_node("Debug/TargetDebug").visible = is_toggled
+
+func _on_tower_state_toggled(is_toggled: bool):
+	for t in get_tree().get_nodes_in_group("Tower"):
+		t.get_node("Debug/StateDebug").visible = is_toggled
+
+func _on_tower_target_toggled(is_toggled: bool):
+	for t in get_tree().get_nodes_in_group("Tower"):
+		t.get_node("Debug/TargetDebug").visible = is_toggled
+
