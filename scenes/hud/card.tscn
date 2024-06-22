@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://dvgkxdrmngy2s"]
+
+[ext_resource type="Texture2D" uid="uid://4kry5sthf7b0" path="res://assets/art/hud/cards/BaseCard.png" id="1_1kr0b"]
+[ext_resource type="Texture2D" uid="uid://v4imwvdrjn61" path="res://assets/art/hud/cards/NameTag.png" id="2_by2e1"]
+[ext_resource type="Texture2D" uid="uid://d4d7jnxu7q708" path="res://assets/art/hud/cards/Energy.png" id="3_1tni6"]
+[ext_resource type="FontFile" uid="uid://bylvoyi54agvx" path="res://assets/fonts/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="3_x8cx8"]
+[ext_resource type="Texture2D" uid="uid://v7yl15q0siw" path="res://assets/art/hud/cards/water.png" id="4_h4pyi"]
+[ext_resource type="Texture2D" uid="uid://dk0phm81qiau0" path="res://assets/art/hud/cards/CardType.png" id="5_o177o"]
+[ext_resource type="Texture2D" uid="uid://te361f61yiw1" path="res://assets/art/hud/healthbarProgress.png" id="7_rfa7m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b4jin"]
+font = ExtResource("3_x8cx8")
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5p6bv"]
+font = ExtResource("3_x8cx8")
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pwabd"]
+font = ExtResource("3_x8cx8")
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Card" type="Node2D"]
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_1kr0b")
+
+[node name="TopCard" type="Node2D" parent="."]
+
+[node name="Name" type="Node2D" parent="TopCard"]
+
+[node name="NameSprite" type="Sprite2D" parent="TopCard/Name"]
+texture = ExtResource("2_by2e1")
+
+[node name="NameLabel" type="Label" parent="TopCard/Name"]
+offset_left = -15.0
+offset_top = -36.0
+offset_right = 54.0
+offset_bottom = -18.0
+scale = Vector2(0.405, 0.405)
+text = "Turret"
+label_settings = SubResource("LabelSettings_b4jin")
+
+[node name="CostGroup" type="Node2D" parent="TopCard"]
+
+[node name="EnergyUpkeep" type="Node2D" parent="TopCard/CostGroup"]
+
+[node name="EnergySprite" type="Sprite2D" parent="TopCard/CostGroup/EnergyUpkeep"]
+texture = ExtResource("3_1tni6")
+
+[node name="EnergyLabel" type="Label" parent="TopCard/CostGroup/EnergyUpkeep"]
+offset_left = 15.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = -22.0
+scale = Vector2(0.4, 0.4)
+text = "1"
+label_settings = SubResource("LabelSettings_5p6bv")
+
+[node name="WaterCost" type="Node2D" parent="TopCard/CostGroup"]
+
+[node name="WaterSprite" type="Sprite2D" parent="TopCard/CostGroup/WaterCost"]
+texture = ExtResource("4_h4pyi")
+
+[node name="WaterLabel" type="Label" parent="TopCard/CostGroup/WaterCost"]
+offset_left = 19.0
+offset_top = -36.0
+offset_right = 24.0
+offset_bottom = -18.0
+scale = Vector2(0.4, 0.4)
+text = "1"
+label_settings = SubResource("LabelSettings_5p6bv")
+
+[node name="Type" type="Node2D" parent="TopCard"]
+
+[node name="BaseTypeSprite" type="Sprite2D" parent="TopCard/Type"]
+texture = ExtResource("5_o177o")
+
+[node name="TypeSprite" type="Sprite2D" parent="TopCard/Type"]
+
+[node name="BottomCard" type="Node2D" parent="."]
+
+[node name="CardImage" type="Node2D" parent="BottomCard"]
+position = Vector2(0, -15)
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomCard/CardImage"]
+position = Vector2(4.76837e-07, 1.5)
+scale = Vector2(0.59375, 2.1)
+texture = ExtResource("7_rfa7m")
+
+[node name="Description" type="Node2D" parent="BottomCard"]
+
+[node name="Label" type="Label" parent="BottomCard/Description"]
+offset_left = -20.0
+offset_top = 3.0
+offset_right = 78.0
+offset_bottom = 74.0
+scale = Vector2(0.41, 0.41)
+text = "Place a turret"
+label_settings = SubResource("LabelSettings_pwabd")
+vertical_alignment = 1
+autowrap_mode = 2
